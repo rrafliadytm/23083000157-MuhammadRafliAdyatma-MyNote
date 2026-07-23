@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -14,6 +15,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -30,7 +32,8 @@ import java.util.*
 fun DashboardScreen(
     viewModel: NoteViewModel,
     onAddNote: () -> Unit,
-    onEditNote: (Long) -> Unit
+    onEditNote: (Long) -> Unit,
+    onAbout: () -> Unit
 ) {
     val notes by viewModel.notes.collectAsState()
 
@@ -38,9 +41,15 @@ fun DashboardScreen(
         topBar = {
             TopAppBar(
                 title = { Text("RafliNote Master", fontWeight = FontWeight.Bold) },
+                actions = {
+                    IconButton(onClick = onAbout) {
+                        Icon(Icons.Default.Info, contentDescription = "Tentang Aplikasi")
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
         },
@@ -106,7 +115,7 @@ fun NoteCard(
             .fillMaxWidth()
             .clickable { onClick() },
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
+            containerColor = Color(note.color)
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -124,13 +133,13 @@ fun NoteCard(
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f),
-                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                    color = Color.Black
                 )
                 IconButton(onClick = onDelete) {
                     Icon(
                         imageVector = Icons.Default.Delete,
                         contentDescription = "Hapus",
-                        tint = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f)
+                        tint = Color.Black.copy(alpha = 0.6f)
                     )
                 }
             }
@@ -138,7 +147,7 @@ fun NoteCard(
             Text(
                 text = dateString,
                 style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                color = Color.Black.copy(alpha = 0.7f)
             )
         }
     }

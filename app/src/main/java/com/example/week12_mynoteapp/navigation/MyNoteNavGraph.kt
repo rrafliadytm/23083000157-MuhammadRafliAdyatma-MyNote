@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.week12_mynoteapp.ui.screens.AboutScreen
 import com.example.week12_mynoteapp.ui.screens.DashboardScreen
 import com.example.week12_mynoteapp.ui.screens.EditorScreen
 import com.example.week12_mynoteapp.viewmodel.NoteViewModel
@@ -34,8 +35,16 @@ fun MyNoteNavGraph(
                 },
                 onEditNote = { noteId ->
                     navController.navigate(Screen.Editor.createRoute(noteId))
+                },
+                onAbout = {
+                    navController.navigate(Screen.About.route)
                 }
             )
+        }
+
+        // Rute About
+        composable(Screen.About.route) {
+            AboutScreen(onBack = { navController.popBackStack() })
         }
 
         // Rute Editor (dengan optional argument noteId)
