@@ -1,4 +1,4 @@
-# 📝 MyNote App - RafliNote Master
+# 📱 Project Week 7: My Note ✨
 
 A modern Android Note-taking application built with **Jetpack Compose**, featuring a "Sticky Note" aesthetic with color customization and local persistence.
 
